@@ -6,9 +6,6 @@ function calculate() {
     let arrTrade = [];
     $('select').each(function() {
         let temp = $(this).find(":selected").text();
-        if (temp.length > 1) {
-            temp = 0;
-        }
         arrTrade.push(temp);
     });
     let arrCard = [];
@@ -35,3 +32,18 @@ function calculate() {
     }
     alert(result);
 }
+
+function clear() {
+    $('select').each(function() {
+        $(this).val('0');
+    });
+    $('select').material_select();
+    $("input[type='checkbox']").each(function() {
+        $(this).prop('checked', false);
+    });
+}
+
+$(document).keyup(function(e) {
+    if (e.keyCode === 13) calculate(); // enter
+    if (e.keyCode === 27) clear(); // esc
+});
