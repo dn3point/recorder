@@ -24,13 +24,13 @@
           <form class="container" action="#">
             <h6>Number of Trade</h6>
             <p>
-              <input class="with-gap" name="group1" type="radio" id="trade_0" checked />
+              <input class="with-gap" name="trade" type="radio" id="trade_0" checked />
               <label class="margin-right-20" for="trade_0">0</label>
-              <input class="with-gap" name="group1" type="radio" id="trade_1" />
+              <input class="with-gap" name="trade" type="radio" id="trade_1" />
               <label class="margin-right-20" for="trade_1">1</label>
-              <input class="with-gap" name="group1" type="radio" id="trade_2" />
+              <input class="with-gap" name="trade" type="radio" id="trade_2" />
               <label class="margin-right-20" for="trade_2">2</label>
-              <input class="with-gap" name="group1" type="radio" id="trade_3" />
+              <input class="with-gap" name="trade" type="radio" id="trade_3" />
               <label class="margin-right-20" for="trade_3">3</label>
             </p>
             <h6>Cards</h6>
@@ -57,18 +57,14 @@
               <label class="margin-right-20" for="card_10">10</label>
             </p>
             <br>
-            <a class="waves-effect waves-light btn">new</a>
-            <a class="waves-effect waves-light btn">add</a>
-            <a class="waves-effect waves-light btn">calculate</a>
+            <a class="waves-effect waves-light btn" onclick="clear()">new</a>
+            <a class="waves-effect waves-light btn" onclick="calculate()">add</a>
+            <a class="waves-effect waves-light btn" onclick="updateResult()">calculate</a>
           </form>
         </div>
       </div>
     </div>
-  </div>
-  <div class="fixed-action-btn" style="bottom:24px;right:24px;" onclick="calculate()">
-    <a class="btn-floating btn-large red">
-      <i class="large material-icons">send</i>
-    </a>
+    <p id="result"></p>
   </div>
   <!--Import jQuery before materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

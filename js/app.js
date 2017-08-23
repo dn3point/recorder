@@ -1,43 +1,30 @@
-$(document).ready(function() {
-    $('select').material_select();
-});
+var total = 0;
 
 function calculate() {
-    let arrTrade = [];
-    $('select').each(function() {
-        let temp = $(this).find(":selected").text();
-        arrTrade.push(temp);
-    });
-    let arrCard = [];
-    $("input[type='checkbox']").each(function() {
-        arrCard.push($(this).prop('checked'));
-    });
+    let tradeId = $('input[name=trade]:checked').attr('id');
+    let multi = parseInt(tradeId.substring(tradeId.length - 1)) + 1;
+    let cards = $("input[type='checkbox']:checked");
     let result = 0;
-    for (let i = 0; i < 5; i++) {
-        let multi = parseInt(arrTrade[i]) + 1;
-        let count = 0;
-        let sum = -20;
-        for (let j = 0; j < 9; j++) {
-            let index = i * 9 + j;
-            if (arrCard[index]) {
-                count++;
-                sum += (j + 2);
-            }
+    $("input[type='checkbox']:checked").each(function() {
+        let cardId = $(this).attr('id');
+        let card = parseInt(cardId.substring(cardId.length - 1));
+        result += card;
+    });
+    if (cards.length > 0 || multi > 1) {
+        result -= 20;
+        result *= multi;
+        if (cards.length + multi > 8) {
+            result += 20;
         }
-        sum *= multi;
-        if (count + multi > 8 || (count == 0 && multi == 1)) {
-            sum += 20;
-        }
-        result += sum;
     }
-    alert(result);
+    total += result;
+    $('#result').text(total);
+    clear();
 }
 
 function clear() {
-    $('select').each(function() {
-        $(this).val('0');
-    });
-    $('select').material_select();
+    // TODO
+    $('input[name=trade][id=card_0]').prop('checked', false);
     $("input[type='checkbox']").each(function() {
         $(this).prop('checked', false);
     });
