@@ -1,6 +1,13 @@
+var count = 0;
 var total = 0;
 
 function calculate() {
+    if (count === 5) {
+        alert("Cannot add more than 5 sets of cards!")
+        return;
+    } else {
+        count++;
+    }
     let tradeId = $('input[name=trade]:checked').attr('id');
     let multi = parseInt(tradeId.substring(tradeId.length - 1)) + 1;
     let cards = $("input[type='checkbox']:checked");
@@ -23,12 +30,18 @@ function calculate() {
 }
 
 function clear() {
-    // TODO
-    $('input[name=trade][id=card_0]').prop('checked', false);
+    $("#trade_0").prop("checked", true);
     $("input[type='checkbox']").each(function() {
         $(this).prop('checked', false);
     });
 }
+
+$("#new_btn").click(function() {
+    clear();
+    $('#result').text('');
+    total = 0;
+    count = 0;
+});
 
 $(document).keyup(function(e) {
     if (e.keyCode === 13) calculate(); // enter
