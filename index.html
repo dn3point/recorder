@@ -17,11 +17,13 @@
   <div class="container">
     <div class="row">
       <div class="col s12 m6 offset-m3">
-        <div class="row">
-          <h5 class="center-align">Lost of City</h5>
+        <div class="row center-align">
+          <h5>Lost of City</h5>
+          <a class="waves-effect waves-light btn" id="btn_game" onclick="createGame()">new match</a>
         </div>
         <div class="row">
-          <form class="container" action="#">
+          <form style="display:none" class="container" action="#">
+            <h6 style="display:none">Match <span id="match"></span> Game <span id="game"></span></h6><br>
             <h6>Number of Trade</h6>
             <p>
               <input class="with-gap" name="trade" type="radio" id="trade_0" checked />
@@ -34,7 +36,7 @@
               <label class="margin-right-20" for="trade_3">3</label>
             </p>
             <h6>Cards</h6>
-            <p>
+            <div>
               <input type="checkbox" class="filled-in" id="card_2" />
               <label class="margin-right-20" for="card_2">2</label>
               <input type="checkbox" class="filled-in" id="card_3" />
@@ -43,10 +45,10 @@
               <label class="margin-right-20" for="card_4">4</label>
               <input type="checkbox" class="filled-in" id="card_5" />
               <label class="margin-right-20" for="card_5">5</label>
+            </div>
+            <div>
               <input type="checkbox" class="filled-in" id="card_6" />
               <label class="margin-right-20" for="card_6">6</label>
-            </p>
-            <p>
               <input type="checkbox" class="filled-in" id="card_7" />
               <label class="margin-right-20" for="card_7">7</label>
               <input type="checkbox" class="filled-in" id="card_8" />
@@ -55,15 +57,48 @@
               <label class="margin-right-20" for="card_9">9</label>
               <input type="checkbox" class="filled-in" id="card_10" />
               <label class="margin-right-20" for="card_10">10</label>
-            </p>
+            </div>
             <br>
-            <a class="waves-effect waves-light btn" id="new_btn">clear</a>
+            <a class="waves-effect waves-light btn" id="new_btn">next</a>
             <a class="waves-effect waves-light btn" onclick="calculate()">add</a>
           </form>
         </div>
       </div>
     </div>
-    <p id="result"></p>
+    <table style="display:none" id="t_game">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Game 1</th>
+          <th>Game 2</th>
+          <th>Game 3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ge Ge</td>
+          <td id="g_1"></td>
+          <td id="g_2"></td>
+          <td id="g_3"></td>
+        </tr>
+        <tr>
+          <td>Niu Niu</td>
+          <td id="n_1"></td>
+          <td id="n_2"></td>
+          <td id="n_3"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table style="display:none" id="t_all">
+      <thead>
+        <tr>
+          <th>Match</th>
+          <th>Winner</th>
+        </tr>
+      </thead>
+      <tbody id="tb_all">
+      </tbody>
+    </table>
   </div>
   <!--Import jQuery before materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

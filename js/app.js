@@ -1,5 +1,10 @@
 var count = 0;
 var total = 0;
+var game = 0;
+var turn = 0;
+var results = [0, 0];
+var match = 0;
+var matchString = "<tr><td>$MATCH$</td><td>$WINNER$</td></tr>";
 
 function calculate() {
     if (count === 5) {
@@ -25,7 +30,13 @@ function calculate() {
         }
     }
     total += result;
-    $('#result').text(total);
+    if (turn === 0) {
+        results[0] += total;
+        $("#g_" + game).text(total);
+    } else {
+        results[1] += total;
+        $("#n_" + game).text(total);
+    }
     clear();
 }
 
@@ -34,16 +45,57 @@ function clear() {
     $("input[type='checkbox']").each(function() {
         $(this).prop('checked', false);
     });
+
 }
 
 $("#new_btn").click(function() {
     clear();
     $('#result').text('');
-    total = 0;
     count = 0;
+    total = 0;
+    if (turn === 0) {
+        turn = 1;
+        $("#n_" + game).text(0);
+    } else {
+        turn = 0;
+        if (game === 3) {
+            game = 1;
+            let winner = results[0] >= results[1] ? "Ge Ge" : "Niu Niu";
+            $("#tb_all").append(matchString.replace("$MATCH$", match).replace("$WINNER$", winner));
+            results = [0, 0];
+            match++;
+            for (let i = 1; i <= 3; i++) {
+                $("#g_" + i).text('');
+                $("#n_" + i).text('');
+            }
+            $("#g_" + game).text(0);
+            updateGameMatchString();
+            confirm("Winner is " + winner + "! Start a new match!");
+        } else {
+            game++;
+            $("#g_" + game).text(0);
+            updateGameMatchString();
+        }
+    }
 });
 
 $(document).keyup(function(e) {
     if (e.keyCode === 13) calculate(); // enter
     if (e.keyCode === 27) clear(); // esc
 });
+
+function createGame() {
+    $("#btn_game").hide();
+    $("form").show();
+    $("table").show();
+    $("h6").show();
+    match = 1;
+    game = 1;
+    updateGameMatchString();
+}
+
+function updateGameMatchString() {
+    $("#game").text(game);
+    $("#match").text(match);
+    $("#g_" + game).text(0);
+}
