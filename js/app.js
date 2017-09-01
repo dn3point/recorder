@@ -19,7 +19,7 @@ function calculate() {
     let result = 0;
     $("input[type='checkbox']:checked").each(function() {
         let cardId = $(this).attr('id');
-        let card = parseInt(cardId.substring(cardId.length - 1));
+        let card = cardId.length === 6 ? parseInt(cardId.substring(cardId.length - 1)) : parseInt(cardId.substring(cardId.length - 2));
         result += card;
     });
     if (cards.length > 0 || multi > 1) {
@@ -45,7 +45,6 @@ function clear() {
     $("input[type='checkbox']").each(function() {
         $(this).prop('checked', false);
     });
-
 }
 
 $("#new_btn").click(function() {
@@ -77,11 +76,6 @@ $("#new_btn").click(function() {
             updateGameMatchString();
         }
     }
-});
-
-$(document).keyup(function(e) {
-    if (e.keyCode === 13) calculate(); // enter
-    if (e.keyCode === 27) clear(); // esc
 });
 
 function createGame() {
